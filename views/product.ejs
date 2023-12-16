@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--========== BOX ICONS ==========-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      form {
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        width: 503px;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-top: 20px;
+      }
+
+      form h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      form label {
+        display: block;
+        margin: 10px 0 5px;
+        color: #555;
+      }
+
+      form input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      form button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      form button:hover {
+        background-color: #45a049;
+      }
+
+      /* Add some additional styling for better visual appeal */
+      form input:focus {
+        outline: none;
+        border-color: #4caf50;
+      }
+
+      .fa {
+        margin-right: 5px;
+      }
+    </style>
+
+    <title>Responsive sidebar submenus</title>
+    <script>
+      <% if (typeof success !== 'undefined' && success) { %>
+      alert('<%= success %>');
+      <% } %>
+    </script>
+  </head>
+  <body>
+    <!--========== HEADER ==========-->
+    <header class="header">
+      <div class="header__container">
+        <img src="image/perfil.jpg" alt="" class="header__img" />
+
+        <a href="./index.html" class="header__logo">Utility Store</a>
+
+        <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔۔۔۔۔ مناسب دام</div>
+
+        <div class="header__toggle">
+          <i class="bx bx-menu" id="header-toggle"></i>
+        </div>
+      </div>
+    </header>
+
+    <!--========== NAV ==========-->
+    <div class="nav" id="navbar">
+      <nav class="nav__container">
+        <div>
+          <a href="/home" class="nav__link nav__logo">
+            <i class="bx bx-cart nav__icon active"></i>
+            <span class="nav__logo-name active">Utility Store</span>
+          </a>
+
+          <div class="nav__list">
+            <div class="nav__items">
+              <h3 class="nav__subtitle">Functionalities</h3>
+
+              <a href="/home" class="nav__link">
+                <i class="bx bx-home nav__icon"></i>
+                <span class="nav__name">DashBoard</span>
+              </a>
+              <a href="/customer" class="nav__link">
+                <i class="bx bx-user nav__icon"></i>
+                <span class="nav__name">Customer Registration</span>
+              </a>
+              <a href="/product" class="nav__link">
+                <i class="bx bx-store nav__icon"></i>
+                <span class="nav__name">Product Management</span>
+              </a>
+              <a href="/pos" class="nav__link">
+                <i class="bx bx-box nav__icon"></i>
+                <span class="nav__name">POS</span>
+              </a>
+              <a href="/order" class="nav__link">
+                <i class="bx bx-receipt nav__icon"></i>
+                <span class="nav__name">Orders Details</span>
+              </a>
+              <a href="/sales" class="nav__link">
+                <i class="bx bx-table nav__icon"></i>
+                <span class="nav__name">Sales Info</span>
+              </a>
+              <a href="/stock" class="nav__link">
+                <i class="bx bx-package nav__icon"></i>
+                <span class="nav__name">Stock Management</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/" class="nav__link nav__logout">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Log Out</span>
+        </a>
+      </nav>
+    </div>
+
+    <!--========== CONTENTS ==========-->
+    <main class="tp hehe form-page">
+      <form
+        action="/product"
+        method="post"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <h2><i class="fa fa-cube"></i> Product Information</h2>
+
+        <label for="productId">Product ID:</label>
+        <input type="text" id="productId" name="productid" required />
+
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productname" required />
+
+        <label for="unitPrice">Product Unit Price:</label>
+        <input
+          type="number"
+          id="unitPrice"
+          name="unitprice"
+          step="0.01"
+          required
+        />
+
+        <label for="salesTax">Sales Tax:</label>
+        <input
+          type="number"
+          id="salesTax"
+          name="salestax"
+          step="0.01"
+          required
+        />
+        <label for="Stock">Stock</label>
+        <input type="text" id="Stock" name="stock" required />
+
+        <button type="submit"><i class="fa fa-check"></i> Submit</button>
+      </form>
+    </main>
+    <!--========== MAIN JS ==========-->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

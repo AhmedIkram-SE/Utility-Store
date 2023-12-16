@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--========== BOX ICONS ==========-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      // Check if the server sent an error message
+      <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+        alert('<%= errorMessage %>');
+      <% } %>
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        width: 100%;
+      }
+      .container {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 430px;
+        width: 100%;
+        background: #fff;
+        border-radius: 7px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      .container .registration {
+        display: none;
+      }
+      #check:checked ~ .registration {
+        display: block;
+      }
+      #check:checked ~ .login {
+        display: none;
+      }
+      #check {
+        display: none;
+      }
+      .container .form {
+        padding: 2rem;
+      }
+      .form header {
+        font-size: 2rem;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .form input,
+      .submit {
+        height: 60px;
+        width: 100%;
+        padding: 0 15px;
+        font-size: 17px;
+        margin-bottom: 1.3rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        outline: none;
+      }
+      .form input:focus,
+      .submit {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+      }
+      .form a {
+        font-size: 16px;
+        color: #009579;
+        text-decoration: none;
+      }
+      .form a:hover {
+        text-decoration: underline;
+      }
+      .form .form.button,
+      .submit {
+        color: #fff;
+        background: #45a049;
+        font-size: 1.2rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        margin-top: 1.7rem;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+      .form input.button:hover,
+      .submit:hover {
+        background: #45a049;
+      }
+      .f-gap {
+        min-height: 100vh;
+      }
+    </style>
+
+    <title>Responsive sidebar submenus</title>
+  </head>
+  <body>
+    <!--========== HEADER ==========-->
+    <header class="header">
+      <div class="header__container">
+        <img src="image/perfil.jpg" alt="" class="header__img" />
+
+        <a href="./index.html" class="header__logo">Utility Store</a>
+
+        <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔۔۔۔۔ مناسب دام</div>
+
+        <div class="header__toggle">
+          <i class="bx bx-menu" id="header-toggle"></i>
+        </div>
+      </div>
+    </header>
+
+    <!--========== CONTENTS ==========-->
+    <main class="tp hehe form-page">
+      <div class="f-gap">
+        <div class="container">
+          <input type="checkbox" id="check" />
+          <div class="login form">
+            <header>Login</header>
+            <form
+              action="/"
+              method="post"
+              enctype="application/x-www-form-urlencoded"
+            >
+              <input
+                type="text"
+                placeholder="Enter your Id"
+                name="employeeId"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Enter your password"
+                name="password"
+                required
+              />
+              <button type="submit" class="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--========== MAIN JS ==========-->
+    <script src="/js/main.js"></script>
+    <!-- <script>
+      $("#submit-js").on("click", function () {
+        // Get values from form
+        const employeeId = $("#employeeId").val();
+        const password = $("#password").val();
+
+        // Make an AJAX request using jQuery
+        if (employeeId && password) {
+          $.ajax({
+            url: "api/login",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ employeeId, password }),
+            success: function (data) {
+              console.log(data);
+            },
+            error: function (error) {
+              console.error("Error:", error);
+              alert("Invalid Email or Password");
+            },
+          });
+        }
+      });
+    </script> -->
+  </body>
+</html>

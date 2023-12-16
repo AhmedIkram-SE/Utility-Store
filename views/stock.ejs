@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--========== BOX ICONS ==========-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Responsive sidebar submenus</title>
+  </head>
+  <body>
+    <!--========== HEADER ==========-->
+    <header class="header">
+      <div class="header__container">
+        <img src="image/perfil.jpg" alt="" class="header__img" />
+
+        <a href="./index.html" class="header__logo">Utility Store</a>
+
+        <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔۔۔۔۔ مناسب دام</div>
+
+        <div class="header__toggle">
+          <i class="bx bx-menu" id="header-toggle"></i>
+        </div>
+      </div>
+    </header>
+
+    <!--========== NAV ==========-->
+    <div class="nav" id="navbar">
+      <nav class="nav__container">
+        <div>
+          <a href="/home" class="nav__link nav__logo">
+            <i class="bx bx-cart nav__icon active"></i>
+            <span class="nav__logo-name active">Utility Store</span>
+          </a>
+
+          <div class="nav__list">
+            <div class="nav__items">
+              <h3 class="nav__subtitle">Functionalities</h3>
+
+              <a href="/home" class="nav__link">
+                <i class="bx bx-home nav__icon"></i>
+                <span class="nav__name">DashBoard</span>
+              </a>
+              <a href="/customer" class="nav__link">
+                <i class="bx bx-user nav__icon"></i>
+                <span class="nav__name">Customer Registration</span>
+              </a>
+              <a href="/product" class="nav__link">
+                <i class="bx bx-store nav__icon"></i>
+                <span class="nav__name">Product Management</span>
+              </a>
+              <a href="/pos" class="nav__link">
+                <i class="bx bx-box nav__icon"></i>
+                <span class="nav__name">POS</span>
+              </a>
+              <a href="/order" class="nav__link">
+                <i class="bx bx-receipt nav__icon"></i>
+                <span class="nav__name">Orders Details</span>
+              </a>
+              <a href="/sales" class="nav__link">
+                <i class="bx bx-table nav__icon"></i>
+                <span class="nav__name">Sales Info</span>
+              </a>
+              <a href="/stock" class="nav__link">
+                <i class="bx bx-package nav__icon"></i>
+                <span class="nav__name">Stock Management</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/" class="nav__link nav__logout">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Log Out</span>
+        </a>
+      </nav>
+    </div>
+
+    <!--========== CONTENTS ==========-->
+    <main class="hehe container-fluid">
+      <div class="container-fluid">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >PRODUCT ID</span
+          >
+          <input
+            type="text"
+            class="form-control product-js"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">QUANTITY</span>
+          <input
+            type="text"
+            class="form-control quantity-js"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+          <button class="btn btn-success stock-js">Update Stock</button>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">PRICE</span>
+          <input
+            type="text"
+            class="form-control price"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+          <button class="btn btn-success price-js">Update Price</button>
+        </div>
+        <table class="table table-success opacity table-striped tb">
+          <thead>
+            <tr>
+              <th scope="col">Product Id</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Product Price</th>
+              <th scope="col">Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% stock.forEach(product=>{ %>
+
+            <tr>
+              <td><%= product.PRODUCTID %></td>
+              <td><%= product.PRODUCTNAME %></td>
+              <td><%= product.PRODUCTPRICE %></td>
+              <td><%= product.STOCK %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!--========== MAIN JS ==========-->
+    <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      $(".stock-js").on("click", function () {
+        var productId = $(".product-js").val();
+        var quantity = $(".quantity-js").val();
+
+        if (productId && quantity) {
+          // Make a POST request to localhost/stock
+          $.ajax({
+            url: "http://localhost/stock",
+            method: "POST",
+            data: { productId: productId, quantity: quantity },
+            success: function (response) {
+              if (response.message === "failed") {
+                alert("Invalid Data");
+              } else if (response.message === "nothing") {
+                alert("No product Found");
+              } else {
+                location.reload();
+              }
+              console.log("Stock updated successfully:", response);
+              // Handle success, e.g., show a success message
+            },
+            error: function (error) {
+              alert("Invalid Data");
+              console.error("Error updating stock:", error);
+              // Handle error, e.g., show an error message
+            },
+          });
+        }
+      });
+
+      // Update Price button click event
+      $(".price-js").on("click", function () {
+        var productId = $(".product-js").val();
+        var price = $(".price").val();
+        if (productId && price) {
+          // Make a POST request to localhost/price
+          $.ajax({
+            url: "http://localhost/stock",
+            method: "POST",
+            data: { productId: productId, price: price },
+            success: function (response) {
+              if (response.message === "failed") {
+                alert("Invalid Data");
+              } else {
+                location.reload();
+              }
+              console.log("Price updated successfully:", response);
+              // Handle success, e.g., show a success message
+            },
+            error: function (error) {
+              alert("Invalid Data");
+              console.error("Error updating price:", error);
+              // Handle error, e.g., show an error message
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
