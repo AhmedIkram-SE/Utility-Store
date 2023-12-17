@@ -164,7 +164,9 @@
         var productId = $(".product-js").val();
         var quantity = $(".quantity-js").val();
 
-        if (productId && quantity) {
+        if (quantity < 0) {
+          alert("Quantity cannot be a Negative Number");
+        } else if (productId && quantity) {
           // Make a POST request to localhost/stock
           $.ajax({
             url: "http://localhost/stock",
@@ -194,7 +196,9 @@
       $(".price-js").on("click", function () {
         var productId = $(".product-js").val();
         var price = $(".price").val();
-        if (productId && price) {
+        if (price < 0) {
+          alert("Price cannot be a Negative Number");
+        } else if (productId && price) {
           // Make a POST request to localhost/price
           $.ajax({
             url: "http://localhost/stock",

@@ -88,13 +88,11 @@ WHERE
 exports.changeProduct = catchAsync(async (req, res) => {
   const query = `SELECT * FROM PRODUCTS WHERE PRODUCTID='${req.body.productId}'`;
   const data = await executeQuery(query);
-  console.log(data);
   if (data.length === 0) {
     res.json({
       message: "nothing",
     });
-  }
-  if (req.body.quantity) {
+  } else if (req.body.quantity) {
     const query = `UPDATE INVENTORY
     SET PRODUCTQUANTITY = ${req.body.quantity}
     WHERE PRODUCTID = '${req.body.productId}'`;

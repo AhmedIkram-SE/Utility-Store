@@ -28,34 +28,50 @@ exports.employeeLogin = catchAsync(async (req, res) => {
 
 //ADDING CUSTOMER
 exports.addCustomer = catchAsync(async (req, res) => {
-  const query = `INSERT INTO CUSTOMERS(CNIC,CUSTOMERNAME,CustomerAddress,PhoneNumber)
+  const query1 = `SELECT CNIC FROM CUSTOMERS WHERE CNIC= '${req.body.cnic}'`;
+  const data = await executeQuery(query1);
+  if (data.length > 0) {
+    res.render("customer", {
+      success: `${req.body.cnic} already exists`,
+    });
+  } else {
+    const query = `INSERT INTO CUSTOMERS(CNIC,CUSTOMERNAME,CustomerAddress,PhoneNumber)
 VALUES (?,?,?,?)`;
-  const values = [
-    req.body.cnic,
-    req.body.customername,
-    req.body.address,
-    req.body.phonenumber,
-  ];
-  await executeQuery(query, values);
-  res.render("customer", { success: "Customer Added" });
+    const values = [
+      req.body.cnic,
+      req.body.customername,
+      req.body.address,
+      req.body.phonenumber,
+    ];
+    await executeQuery(query, values);
+    res.render("customer", { success: "Customer Added" });
+  }
 });
 
 //ADDING PRODUCT
 exports.addProduct = catchAsync(async (req, res) => {
-  const query1 = `INSERT INTO PRODUCTS (PRODUCTID,PRODUCTNAME,UNITPRICE,SALESTAX)
+  const query = `SELECT PRODUCTID FROM PRODUCTS WHERE PRODUCTID= '${req.body.productid}'`;
+  const data = await executeQuery(query);
+  if (data.length > 0) {
+    res.render("product", {
+      success: `${req.body.productid} is already in use`,
+    });
+  } else {
+    const query1 = `INSERT INTO PRODUCTS (PRODUCTID,PRODUCTNAME,UNITPRICE,SALESTAX)
 VALUES (?,?,?,?)`;
-  const query2 = `INSERT INTO INVENTORY(PRODUCTID,PRODUCTQUANTITY)
+    const query2 = `INSERT INTO INVENTORY(PRODUCTID,PRODUCTQUANTITY)
   VALUES(?,?)`;
-  const product = [
-    req.body.productid,
-    req.body.productname,
-    parseFloat(req.body.unitprice), // Explicitly convert to float if applicable
-    parseFloat(req.body.salestax),
-  ];
-  const stocks = [req.body.productid, parseInt(req.body.stock)];
-  await executeQuery(query1, product);
-  await executeQuery(query2, stocks);
-  res.render("product", { success: `${req.body.productname} Added` });
+    const product = [
+      req.body.productid,
+      req.body.productname,
+      parseFloat(req.body.unitprice), // Explicitly convert to float if applicable
+      parseFloat(req.body.salestax),
+    ];
+    const stocks = [req.body.productid, parseInt(req.body.stock)];
+    await executeQuery(query1, product);
+    await executeQuery(query2, stocks);
+    res.render("product", { success: `${req.body.productname} Added` });
+  }
 });
 
 //CREATE SALE ID

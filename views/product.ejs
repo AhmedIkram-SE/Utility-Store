@@ -184,7 +184,9 @@
           type="number"
           id="unitPrice"
           name="unitprice"
-          step="0.01"
+          step="1"
+          min="0"
+          pattern="\d+"
           required
         />
 
@@ -193,11 +195,20 @@
           type="number"
           id="salesTax"
           name="salestax"
-          step="0.01"
+          step="1"
+          min="0"
+          pattern="\d+"
           required
         />
         <label for="Stock">Stock</label>
-        <input type="text" id="Stock" name="stock" required />
+        <input
+          type="number"
+          id="Stock"
+          name="stock"
+          min="0"
+          pattern="\d+"
+          required
+        />
 
         <button type="submit"><i class="fa fa-check"></i> Submit</button>
       </form>
