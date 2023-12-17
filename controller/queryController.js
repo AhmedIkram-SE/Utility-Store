@@ -1,14 +1,35 @@
 const executeQuery = require("../util/connection");
 const catchAsync = require("../util/catchAsync");
+const validator = require("../util/validator");
 
 exports.getProduct = catchAsync(async (req, res) => {
-  const query = `SELECT * FROM PRODUCTS WHERE PRODUCTNAME ='${req.params.id}'`;
+  const query = `SELECT * FROM PRODUCTS WHERE PRODUCTNAME ='${req.body.product}'`;
+  const CNIC = req.body.cnic;
   let product = await executeQuery(query);
-  product[0].QUANTITY = 1;
-  product[0].PRODUCTNAME = product[0].PRODUCTNAME.toLowerCase();
-  res.json({
-    product: product[0],
-  });
+
+  /////STOCK CHECKING
+  const stock = `SELECT PRODUCTQUANTITY FROM INVENTORY WHERE PRODUCTID = '${product[0].PRODUCTID}' `;
+  const available = await executeQuery(stock);
+  console.log(available[0].PRODUCTQUANTITY, req.body.quantity);
+
+  if (available[0].PRODUCTQUANTITY >= req.body.quantity + 1) {
+    //////
+    if (await validator(CNIC, product[0].PRODUCTID, req.body.quantity)) {
+      product[0].QUANTITY = 1;
+      product[0].PRODUCTNAME = product[0].PRODUCTNAME.toLowerCase();
+      res.json({
+        product: product[0],
+      });
+    } else {
+      res.json({
+        message: `${product[0].PRODUCTNAME} Limit Reached`,
+      });
+    }
+  } else {
+    res.json({
+      message: `${req.body.product} is out of stock`,
+    });
+  }
 });
 
 exports.getOrderDetails = catchAsync(async (req, res) => {

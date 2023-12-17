@@ -7,6 +7,10 @@ const security = require("../util/security");
 
 router.route("/").get(viewController.login).post(posController.employeeLogin);
 router.route("/home").get(security, viewController.home);
+
+router
+  .route("/customerdetails")
+  .get(security, viewController.getCustomerDetails);
 router
   .route("/customer")
   .get(security, viewController.customer)
@@ -28,7 +32,7 @@ router
   .get(security, viewController.stock)
   .post(queryController.changeProduct);
 
-router.route("/product/:id").get(queryController.getProduct);
+router.route("/productvalidation").post(queryController.getProduct);
 router.route("/customer/:id").get(queryController.getOrderDetails);
 router.route("/customers/:id").get(queryController.getSpecificOrderDetails);
 

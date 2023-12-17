@@ -2,10 +2,10 @@ const executeQuery = require("../util/connection");
 const catchAsync = require("../util/catchAsync");
 
 //1.LOGIN PAGE
-exports.login = catchAsync((req, res, next) => {
+exports.login = (req, res, next) => {
   res.cookie("employeeId", "");
   res.render("login");
-});
+};
 
 //2. DASHBOARD
 exports.home = catchAsync(async (req, res, next) => {
@@ -72,6 +72,15 @@ JOIN
 
 //6. CHECKING ORDERS BY EMPLOYEE LIKE SALE ID
 exports.sales = catchAsync(async (req, res, next) => {
+  const sale = `	DELETE FROM SALES
+  WHERE NOT EXISTS (
+      SELECT 1
+      FROM ORDERS
+      WHERE ORDERS.SALEID = SALES.SALEID
+  );`;
+
+  await executeQuery(sale);
+
   const query = `
   SELECT
     S.SALEID,
@@ -106,6 +115,13 @@ exports.order = (req, res, next) => {
 //8. POS PAGE
 exports.pos = (req, res, next) => {
   res.render("pos");
+};
+
+//CUSTOMER DETAILS
+exports.getCustomerDetails = async (req, res, next) => {
+  const query = `SELECT * FROM CUSTOMERS`;
+  const data = await executeQuery(query);
+  res.render("customerdetails", { data });
 };
 
 function conversion(data) {

@@ -3,7 +3,7 @@ const catchAsync = require("../util/catchAsync");
 const validator = require("../util/validator");
 const storage = require("../util/storage");
 
-//LOGIN
+//LOGIN VALIDATOR
 exports.employeeLogin = catchAsync(async (req, res) => {
   let data = {};
   const { employeeId, password } = req.body;
@@ -82,24 +82,18 @@ exports.createOrder = catchAsync(async (req, res) => {
   const query2 = `SELECT CNIC FROM SALES WHERE SALEID =${SALEID}`;
   const cnicResult = await executeQuery(query2);
   const CNIC = cnicResult[0].CNIC;
-
   const products = req.body.products;
   for (const product of products) {
     const { PRODUCTID, PRODUCTNAME, UNITPRICE, SALESTAX, QUANTITY } = product;
-    if (await validator(CNIC, PRODUCTID, QUANTITY)) {
-      const query = ` INSERT INTO ORDERS (ORDERID,PRODUCTID, SALEID, PURCHASEDQUANTITY)
+
+    const query = ` INSERT INTO ORDERS (ORDERID,PRODUCTID, SALEID, PURCHASEDQUANTITY)
     VALUES (${SALEID}, '${PRODUCTID}', ${SALEID},${QUANTITY})`;
-      const query2 = `UPDATE INVENTORY
+    const query2 = `UPDATE INVENTORY
     SET PRODUCTQUANTITY = PRODUCTQUANTITY - ${QUANTITY}
     WHERE PRODUCTID = '${PRODUCTID}';`;
-      await storage(CNIC, PRODUCTID, QUANTITY);
-      const resp = await executeQuery(query);
-      const resp2 = await executeQuery(query2);
-    } else {
-      res.json({
-        message: `${PRODUCTNAME} Limit Reached`,
-      });
-    }
+    await storage(CNIC, PRODUCTID, QUANTITY);
+    const resp = await executeQuery(query);
+    const resp2 = await executeQuery(query2);
   }
   res.json({
     message: "success",
