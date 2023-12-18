@@ -10,8 +10,6 @@ exports.getProduct = catchAsync(async (req, res) => {
   /////STOCK CHECKING
   const stock = `SELECT PRODUCTQUANTITY FROM INVENTORY WHERE PRODUCTID = '${product[0].PRODUCTID}' `;
   const available = await executeQuery(stock);
-  console.log(available[0].PRODUCTQUANTITY, req.body.quantity);
-
   if (available[0].PRODUCTQUANTITY >= req.body.quantity + 1) {
     //////
     if (await validator(CNIC, product[0].PRODUCTID, req.body.quantity)) {
