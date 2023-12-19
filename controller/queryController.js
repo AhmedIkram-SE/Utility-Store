@@ -9,12 +9,14 @@ exports.getProduct = catchAsync(async (req, res) => {
   /////STOCK CHECKING
   const stock = `SELECT PRODUCTQUANTITY FROM INVENTORY WHERE PRODUCTID = '${product[0].PRODUCTID}' `;
   const available = await executeQuery(stock);
+  console.log(req.body);
   if (available[0].PRODUCTQUANTITY >= req.body.quantity + 1) {
     //////
     if (await validator(CNIC, product[0].PRODUCTID, req.body.quantity)) {
       product[0].QUANTITY = 1;
-      product[0].PRODUCTNAME = product[0].PRODUCTNAME.toLowerCase();
-      product[0].PRODUCTID = product[0].PRODUCTID.toLowerCase();
+      // product[0].QUANTITY = req.body.quantity + 1;
+      product[0].PRODUCTNAME = product[0].PRODUCTNAME;
+      product[0].PRODUCTID = product[0].PRODUCTID.toUpperCase();
       res.json({
         product: product[0],
       });

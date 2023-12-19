@@ -7,6 +7,7 @@ module.exports = validator = (CNIC, PID, QUANTITY) => {
       let storage = 0;
       const query1 = `SELECT LIMITQUANTITY FROM LIMITS WHERE PRODUCTID='${PID}'`;
       const allowed = await executeQuery(query1);
+      console.log(allowed);
       if (allowed.length > 0) {
         allowedQuantity = allowed[0].LIMITQUANTITY;
         const storageChecking = `SELECT PURCHASEDQUANTITY FROM STORAGE WHERE CNIC='${CNIC}' AND PRODUCTID='${PID}'`;

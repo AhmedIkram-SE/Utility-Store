@@ -214,15 +214,16 @@
 
       $(".product-js").click(function () {
         if ($(".cnic").val()) {
-          const product = $(".product").val().toLowerCase();
+          var audio = new Audio("sound/barcode.mp3");
+          audio.play();
+          const product = $(".product").val().toUpperCase();
 
           const existingProduct = products.find(
             (p) => p.PRODUCTID === product
             //  || p.PRODUCTNAME === product
           );
+          const quantity = existingProduct ? existingProduct.QUANTITY : 0;
 
-          // If the product is found, get its quantity
-          const quantity = existingProduct ? existingProduct.QUANTITY : 1;
           const requestData = {
             cnic: $(".cnic").val(),
             product: $(".product").val(),
@@ -238,15 +239,11 @@
               if (response.message) {
                 alert(response.message);
               } else {
-                console.log("response from api", response.product);
-                // console.log(products);
                 const existingProduct = products.find(
                   (p) => p.PRODUCTID === response.product.PRODUCTID
-                  // || p.PRODUCTNAME === response.product.PRODUCTNAME
                 );
 
                 if (existingProduct) {
-                  console.log(products);
                   const index = products.indexOf(existingProduct);
                   products[index].QUANTITY += 1;
                   renderTableRow(products);
