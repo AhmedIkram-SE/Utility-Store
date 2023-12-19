@@ -32,13 +32,16 @@
     />
     <title>UtilityStore</title>
   </head>
+  <Style> .tp{ min-height: 66vh; } </Style>
   <body>
     <!--========== HEADER ==========-->
     <header class="header">
       <div class="header__container">
-        <img src="image/perfil.jpg" alt="" class="header__img" />
+        <img src="image/pakistan.jpg" alt="" class="header__img" />
 
-        <a href="./index.html" class="header__logo">Utility Store</a>
+        <a href="#" class="header__logo">
+          <img src="image/us.jpeg" class="mylogo" alt=""
+        /></a>
 
         <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔۔۔۔۔ مناسب دام</div>
 
@@ -116,16 +119,18 @@
             class="form-control cnic"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
+            placeholder="Enter CNIC"
           />
           <button class="btn btn-success cnic-js">Add CNIC</button>
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text">PRODUCT NAME</span>
+          <span class="input-group-text">PRODUCT ID/NAME</span>
           <input
             type="text"
             class="form-control product"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
+            placeholder="Enter Product ID or Name"
           />
           <button class="btn btn-success product-js">Add Product</button>
         </div>
@@ -212,7 +217,8 @@
           const product = $(".product").val().toLowerCase();
 
           const existingProduct = products.find(
-            (p) => p.PRODUCTNAME === product
+            (p) => p.PRODUCTID === product
+            //  || p.PRODUCTNAME === product
           );
 
           // If the product is found, get its quantity
@@ -232,10 +238,11 @@
               if (response.message) {
                 alert(response.message);
               } else {
-                console.log(response.product);
-                console.log(products);
+                console.log("response from api", response.product);
+                // console.log(products);
                 const existingProduct = products.find(
-                  (p) => p.PRODUCTNAME === response.product.PRODUCTNAME
+                  (p) => p.PRODUCTID === response.product.PRODUCTID
+                  // || p.PRODUCTNAME === response.product.PRODUCTNAME
                 );
 
                 if (existingProduct) {

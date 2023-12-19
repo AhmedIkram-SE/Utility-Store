@@ -96,6 +96,7 @@ img {
   font-weight: var(--font-medium);
   display: none;
   font-size: 26px;
+  text-decoration: none;
 }
 
 .header__search {
@@ -273,13 +274,14 @@ img {
 
 @media screen and (min-width: 768px) {
   body {
-    padding: 1rem 3rem 0 6rem;
+    /* padding: 1rem 3rem 0 6rem; */
+    padding: 2rem 3rem 0 5rem;
   }
   .header {
-    padding: 0 3rem 0 6rem;
+    padding: 0 2rem 0 5rem;
   }
   .header__container {
-    height: calc(var(--header-height) + 0.5rem);
+    height: calc(var(--header-height) + 1.5rem);
   }
   .header__search {
     width: 300px;
@@ -290,11 +292,14 @@ img {
   }
   .header__logo {
     display: block;
+    cursor: pointer;
+    text-decoration: none;
   }
   .header__img {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     order: 1;
+    object-fit: cover;
   }
   .nav {
     left: 0;
@@ -384,4 +389,13 @@ img {
 
 .opacity {
   opacity: 0.9;
+}
+
+.mylogo {
+  height: 80px;
+}
+
+.urdu {
+  /* margin-left: -230px !important; */
+  margin-left: -330px !important;
 }

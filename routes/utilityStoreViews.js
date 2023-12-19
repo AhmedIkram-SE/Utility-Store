@@ -24,6 +24,7 @@ router
   .route("/pos")
   .get(security, viewController.pos)
   .post(posController.createSaleId);
+
 router.route("/posdetails").post(posController.createOrder);
 router.route("/order").get(security, viewController.order);
 router.route("/sales").get(security, viewController.sales);

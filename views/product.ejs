@@ -28,15 +28,20 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <style>
+      .tp {
+        min-height: 88vh;
+      }
       form {
         background-color: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         padding: 20px;
-        width: 503px;
+        /* width: 503px; */
+        /* width: 380px; */
         max-width: 100%;
         box-sizing: border-box;
-        margin-top: 20px;
+        /* margin-top: 20px; */
+        margin-top: -30px;
       }
 
       form h2 {
@@ -102,9 +107,11 @@
     <!--========== HEADER ==========-->
     <header class="header">
       <div class="header__container">
-        <img src="image/perfil.jpg" alt="" class="header__img" />
+        <img src="image/pakistan.jpg" alt="" class="header__img" />
 
-        <a href="./index.html" class="header__logo">Utility Store</a>
+        <a href="#" class="header__logo">
+          <img src="image/us.jpeg" class="mylogo" alt=""
+        /></a>
 
         <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔۔۔۔۔ مناسب دام</div>
 
@@ -196,7 +203,7 @@
           required
         />
 
-        <label for="salesTax">Sales Tax:</label>
+        <!-- <label for="salesTax">Sales Tax:</label>
         <input
           type="number"
           id="salesTax"
@@ -204,8 +211,7 @@
           step="1"
           min="0"
           pattern="\d+"
-          required
-        />
+        /> -->
         <label for="Stock">Stock</label>
         <input
           type="number"

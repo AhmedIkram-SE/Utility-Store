@@ -61,11 +61,13 @@ exports.addProduct = catchAsync(async (req, res) => {
 VALUES (?,?,?,?)`;
     const query2 = `INSERT INTO INVENTORY(PRODUCTID,PRODUCTQUANTITY)
   VALUES(?,?)`;
+    const salestax = parseFloat(req.body.unitprice) * 0.18;
     const product = [
       req.body.productid,
       req.body.productname,
       parseFloat(req.body.unitprice), // Explicitly convert to float if applicable
-      parseFloat(req.body.salestax),
+      salestax,
+      // parseFloat(req.body.salestax),
     ];
     const stocks = [req.body.productid, parseInt(req.body.stock)];
     await executeQuery(query1, product);

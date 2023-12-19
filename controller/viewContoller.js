@@ -44,30 +44,16 @@ exports.home = catchAsync(async (req, res, next) => {
   const ORDERS = await executeQuery(query6);
   const USER = await executeQuery(query7);
 
-  if (STOCKS.length === 0) {
-    const data = {
-      SALES: SALES[0].SALES,
-      TSALES: 0,
-      CUSTOMERS: CUSTOMERS[0].CUSTOMERS,
-      PRODUCTS: PRODUCTS[0].PRODUCTS,
-      EMPLOYEES: EMPLOYEES[0].EMPLOYEES,
-      ORDERS: ORDERS[0].ORDERS,
-      USER: USER[0].EMPLOYEENAME,
-    };
-    res.render("home", { data });
-  } else {
-    const data = {
-      SALES: SALES[0].SALES,
-      TSALES: STOCKS[0].SALES,
-      CUSTOMERS: CUSTOMERS[0].CUSTOMERS,
-      PRODUCTS: PRODUCTS[0].PRODUCTS,
-      EMPLOYEES: EMPLOYEES[0].EMPLOYEES,
-      ORDERS: ORDERS[0].ORDERS,
-      USER: USER[0].EMPLOYEENAME,
-    };
-
-    res.render("home", { data });
-  }
+  const data = {
+    SALES: SALES[0].SALES === null || SALES[0].length < 1 ? 0 : SALES[0].SALES,
+    TSALES: STOCKS.length < 1 ? 0 : STOCKS[0].SALES,
+    CUSTOMERS: CUSTOMERS[0].CUSTOMERS,
+    PRODUCTS: PRODUCTS[0].PRODUCTS,
+    EMPLOYEES: EMPLOYEES[0].EMPLOYEES,
+    ORDERS: ORDERS[0].ORDERS,
+    USER: USER[0].EMPLOYEENAME,
+  };
+  res.render("home", { data });
 });
 
 //3. PRODUCT INFORMATION

@@ -96,17 +96,36 @@
       h4 {
         color: black;
       }
+
+      .welcome {
+        background-color: #f9f6fd;
+        border-radius: 4px;
+      }
+
+      .mylogo {
+        height: 80px;
+      }
+
+      .urdu {
+        margin-left: -210px !important;
+      }
     </style>
   </head>
   <body>
     <!--========== HEADER ==========-->
     <header class="header">
       <div class="header__container">
-        <img src="image/perfil.jpg" alt="" class="header__img" />
+        <img src="image/pakistan.jpg" alt="" class="header__img" />
 
-        <a href="#" class="header__logo">Utility Store</a>
+        <!-- <a href="#" class="header__logo">
+          <i class="bx bx-cart nav__icon"></i>Utility Store</a
+        > -->
 
-        <div class="header__logo urdu">معیاری اشیا‍‌ء ۔۔۔ مناسب دام</div>
+        <a href="#" class="header__logo">
+          <img src="image/us.jpeg" class="mylogo" alt=""
+        /></a>
+
+        <div class="header__logo urdu myurdu">معیاری اشیا‍‌ء ۔۔۔ مناسب دام</div>
 
         <div class="header__toggle">
           <i class="bx bx-menu" id="header-toggle"></i>
@@ -175,8 +194,8 @@
       <div class="dashboard-container">
         <!-- Dashboard Header -->
         <div class="dashboard-header">
-          <h1>Welcome, <%= data.USER %>!</h1>
-          <p>Overview of Key Metrics</p>
+          <h1 class="welcome">Welcome, <%= data.USER %>!</h1>
+          <p>Overview of Statistics</p>
         </div>
 
         <!-- Metrics Section -->

@@ -3,10 +3,9 @@ const catchAsync = require("../util/catchAsync");
 const validator = require("../util/validator");
 
 exports.getProduct = catchAsync(async (req, res) => {
-  const query = `SELECT * FROM PRODUCTS WHERE PRODUCTNAME ='${req.body.product}'`;
+  const query = `SELECT * FROM PRODUCTS WHERE PRODUCTID='${req.body.product}' `;
   const CNIC = req.body.cnic;
   let product = await executeQuery(query);
-
   /////STOCK CHECKING
   const stock = `SELECT PRODUCTQUANTITY FROM INVENTORY WHERE PRODUCTID = '${product[0].PRODUCTID}' `;
   const available = await executeQuery(stock);
@@ -15,6 +14,7 @@ exports.getProduct = catchAsync(async (req, res) => {
     if (await validator(CNIC, product[0].PRODUCTID, req.body.quantity)) {
       product[0].QUANTITY = 1;
       product[0].PRODUCTNAME = product[0].PRODUCTNAME.toLowerCase();
+      product[0].PRODUCTID = product[0].PRODUCTID.toLowerCase();
       res.json({
         product: product[0],
       });
@@ -99,8 +99,9 @@ exports.changeProduct = catchAsync(async (req, res) => {
       message: "success",
     });
   } else if (req.body.price) {
+    const salestax = req.body.price * 0.18;
     const query = `UPDATE PRODUCTS
-    SET UNITPRICE = ${req.body.price}
+    SET UNITPRICE = ${req.body.price}, SALESTAX =${salestax}
     WHERE PRODUCTID = '${req.body.productId}'`;
     await executeQuery(query);
     res.json({
